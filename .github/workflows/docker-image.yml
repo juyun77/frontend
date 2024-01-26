@@ -9,22 +9,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Login to Amazon ECR
-      run: echo $AWS_ACCESS_KEY_ID | docker login -u AWS --password-stdin $ECR_REGISTRY_URI
+      - name: Login to Amazon ECR
+        run: echo $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY | docker login -u AWS --password-stdin $ECR_REGISTRY_URI
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
 
-    - name: Build and push Docker image to ECR
-      env:
-        AWS_REGION: ap-northeast-2
-        ECR_REGISTRY_URI: 457017831224.dkr.ecr.ap-northeast-2.amazonaws.com/app-repo
-        ECR_REPOSITORY: app-repo
-        DOCKER_BUILDKIT: 1
-      run: |
-        docker buildx create --use
-        docker buildx inspect
-        docker buildx build . --file ./Dockerfile --tag $ECR_REGISTRY_URI/$ECR_REPOSITORY:latest --push
+      - name: Build and push Docker image to ECR
+        env:
+          AWS_REGION: ap-northeast-2
+          ECR_REGISTRY_URI: 457017831224.dkr.ecr.ap-northeast-2.amazonaws.com
+          ECR_REPOSITORY: app-repo
+          DOCKER_BUILDKIT: 1
+        run: |
+          docker buildx create --use
+          docker buildx inspect
+          docker buildx build . --file ./Dockerfile --tag $ECR_REGISTRY_URI/$ECR_REPOSITORY:latest --push
