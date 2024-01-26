@@ -27,4 +27,4 @@ jobs:
       run: |
         docker buildx create --use
         docker buildx inspect
-        docker buildx build . --file Dockerfile --tag $ECR_REGISTRY_URI/$ECR_REPOSITORY:latest --push
+        docker buildx build . --file ./Dockerfile --tag $ECR_REGISTRY_URI/$ECR_REPOSITORY:latest --push
