@@ -12,24 +12,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create Amazon ECR Docker Configuration
-        run: |
-          echo "{\"credsStore\":\"ecr-login\", \"credHelpers\":{\"$ECR_REGISTRY_URI\":\"ecr-login\"}}" > /home/runner/.docker/config.json
-        env:
-          ECR_REGISTRY_URI: 457017831224.dkr.ecr.ap-northeast-2.amazonaws.com
-
-      - name: Login to Amazon ECR
-        run: docker login $ECR_REGISTRY_URI
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
 
       - name: Build and push Docker image to ECR
         env:
-          ECR_REGISTRY_URI: 457017831224.dkr.ecr.ap-northeast-2.amazonaws.com
+          AWS_REGION: ap-northeast-2
+          ECR_REGISTRY_URI: 457017831224.dkr.ecr.ap-northeast-2.amazonaws.com/app-repo
           ECR_REPOSITORY: app-repo
           DOCKER_BUILDKIT: 1
         run: |
+          echo $AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY | docker login -u AWS --password-stdin $ECR_REGISTRY_URI
           docker buildx create --use
           docker buildx inspect
           docker buildx build . --file ./Dockerfile --tag $ECR_REGISTRY_URI/$ECR_REPOSITORY:latest --push
