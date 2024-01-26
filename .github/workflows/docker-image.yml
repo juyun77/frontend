@@ -13,7 +13,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Login to Amazon ECR
-        run: echo $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY | docker login -u AWS --password-stdin $ECR_REGISTRY_URI
+        run: |
+          echo $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY | docker login -u AWS --password-stdin $ECR_REGISTRY_URI
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
