@@ -22,7 +22,11 @@ jobs:
           ECR_REPOSITORY: app-repo
           DOCKER_BUILDKIT: 1
         run: |
-          echo $AWS_ACCESS_KEY_ID:$AWS_SECRET_ACCESS_KEY | docker login -u AWS --password-stdin $ECR_REGISTRY_URI
+          echo "// $ECR_REGISTRY_URI" > ecr-login.txt
+          echo -n $AWS_ACCESS_KEY_ID >> ecr-login.txt
+          echo -n : >> ecr-login.txt
+          echo $AWS_SECRET_ACCESS_KEY | base64 >> ecr-login.txt
+          cat ecr-login.txt | docker login --username AWS --password-stdin $ECR_REGISTRY_URI
           docker buildx create --use
           docker buildx inspect
           docker buildx build . --file ./Dockerfile --tag $ECR_REGISTRY_URI/$ECR_REPOSITORY:latest --push
