@@ -27,7 +27,7 @@ jobs:
 
       - name: Build and push Docker image to ECR
         env:
-          ECR_REGISTRY_URI: 457017831224.dkr.ecr.ap-northeast-2.amazonaws.com/app-repo
+          ECR_REGISTRY_URI: 457017831224.dkr.ecr.ap-northeast-2.amazonaws.com
           ECR_REPOSITORY: app-repo
           DOCKER_BUILDKIT: 1
         run: |
