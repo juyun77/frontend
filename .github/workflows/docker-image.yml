@@ -66,7 +66,8 @@ jobs:
       
       - name: Image Tag Change
         run: |
-          yq e --inplace '.spec.template.spec.containers[] | select(.name == "frontend-port-80") | .image |= sub(":.*"; ":${{ env.IMAGE_TAG }}")' manifest2/02-deployment.yaml
+          yq e --inplace '.spec.template.spec.containers |= map(if .name == "frontend-port-80" then .image |= sub(":.*"; ":${{ env.IMAGE_TAG }}") else . end)' manifest2/02-deployment.yaml
+
 
 
 
