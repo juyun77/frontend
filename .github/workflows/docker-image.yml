@@ -67,7 +67,7 @@ jobs:
       - name: Image Tag Change
         uses: mikefarah/yq@v4.9.6
         with:
-          cmd: yq e --inplace '.spec.template.spec.containers[0].env[] |= select(.name == "IMAGE_TAG").value = "${{ env.IMAGE_TAG }}"' manifest/02-deployment.yaml
+          cmd: yq e --inplace '.spec.template.spec.containers.image = "457017831224.dkr.ecr.ap-northeast-2.amazonaws.com/testfront:${{ env.IMAGE_TAG }}"' manifest/02-deployment.yaml
 
 
       - name: Create Pull Request
