@@ -12,8 +12,8 @@ export default class HeaderComponent extends Component {
         <header>
           <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div>
-              <a href="https://www.1jo10000jo.link" className="navbar-brand">
-                To-do-list
+              <a href="https://www.juyun.link" className="navbar-brand">
+                To-do-list-test
               </a>
             </div>
           </nav>
