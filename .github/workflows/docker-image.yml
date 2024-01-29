@@ -75,7 +75,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ env.GIT_ACCESS_TOKEN }}
-          commit-message: 'deploy: ${{ env.HASH }}'
+          commit-message: 'deploy: test- ${{ env.HASH }}'
           base: main
           branch: ${{ env.HASH }}
           title: 'deploy: ${{ env.HASH }}'
