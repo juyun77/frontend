@@ -66,7 +66,7 @@ jobs:
       
       - name: Image Tag Change
         run: |
-          yq e --inplace '.spec.template.spec.containers[0].image |= "457017831224.dkr.ecr.ap-northeast-2.amazonaws.com/testfront:${{ env.IMAGE_TAG }}"' manifest/02-deployment.yaml
+          yq e --inplace '.spec.template.spec.containers[0].image |= "457017831224.dkr.ecr.ap-northeast-2.amazonaws.com/testfront:${{ env.IMAGE_TAG }}"' manifest2/02-deployment.yaml
 
 
       - name: Create Pull Request
