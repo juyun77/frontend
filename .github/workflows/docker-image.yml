@@ -1,4 +1,4 @@
-name: Build For game-2048
+name: Build For app
 
 on:
   push:
@@ -74,9 +74,9 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ env.GIT_ACCESS_TOKEN }}
-          commit-message: 'deploy: game2048-${{ env.HASH }}'
+          commit-message: 'deploy: jy-${{ env.HASH }}'
           base: main
-          branch: game2048-${{ env.HASH }}
-          title: 'deploy: game2048-${{ env.HASH }}'
+          branch: jy-${{ env.HASH }}
+          title: 'deploy: jy-${{ env.HASH }}'
           labels: |
             automerge
