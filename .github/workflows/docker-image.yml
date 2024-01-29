@@ -73,10 +73,10 @@ jobs:
         id: cpr
         uses: peter-evans/create-pull-request@v3
         with:
-          token: ${{ secrets.ACTION_TOKEN }}
-          commit-message: 'deploy: test- ${{ env.HASH }}'
+          token: ${{ env.GIT_ACCESS_TOKEN }}
+          commit-message: 'deploy: game2048-${{ env.HASH }}'
           base: main
-          branch: ${{ env.HASH }}
-          title: 'deploy: ${{ env.HASH }}'
+          branch: game2048-${{ env.HASH }}
+          title: 'deploy: game2048-${{ env.HASH }}'
           labels: |
             automerge
