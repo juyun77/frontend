@@ -54,7 +54,7 @@ jobs:
       IMAGE_TAG: ${{ needs.build.outputs.image_tag }}
       GIT_ACCESS_TOKEN: ${{ secrets.ACTION_TOKEN }}
       HASH: ${{ needs.build.outputs.sha }}
-      GIT_REPO: juyun77/manifest-repo           # 각자의 repo 주소로 업데이트 필요
+      GIT_REPO: juyun77/manifest-repo      
 
     steps:
       - name: Clone Deploy repository
@@ -67,7 +67,8 @@ jobs:
       - name: Image Tag Change
         uses: mikefarah/yq@v4.9.6
         with:
-          cmd: yq e --inplace '.spec.template.spec.env.value = "${{ env.IMAGE_TAG }}"' manifest/02-deployment.yaml
+          cmd: yq e --inplace '.spec.template.spec.containers[0].env[] |= select(.name == "IMAGE_TAG").value = "${{ env.IMAGE_TAG }}"' manifest/02-deployment.yaml
+
 
       - name: Create Pull Request
         id: cpr
